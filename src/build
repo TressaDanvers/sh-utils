@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -eu
+check build.sh
+info running build.sh "$@"
+exec sh build.sh "$@"

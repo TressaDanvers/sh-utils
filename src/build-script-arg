@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -eu
+
+bad() {
+  sh "$(dirname "$0")/err-fatal" usage "build.sh [deploy|clean]"
+}
+
+[ "$#" -le 1 ] || bad
+
+case "${1:-}" in
+  ""|deploy|clean) ;;
+  *) bad ;;
+esac

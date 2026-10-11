@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+set -eu
+
+ESC=$(printf '\033')
+TAG="${ESC}[1;33mwarn:${ESC}[0m"
+
+if [ "$#" -eq 0 ]; then
+  echo "$TAG usage: warn first [rest...]" >&2
+  exit 2
+fi
+
+first=$1
+shift
+
+if [ "$#" -eq 0 ]; then
+  echo "$TAG $first" >&2
+else
+  echo "$TAG $first: $*" >&2
+fi

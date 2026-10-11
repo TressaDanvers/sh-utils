@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -eu
+export PREFIX="${1:-}"
+exec build deploy
