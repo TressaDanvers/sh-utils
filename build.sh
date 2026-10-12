@@ -13,7 +13,6 @@ case "${1:-}" in
   deploy)
     mkdir -p "$PREFIX/bin" || sh ./src/err-fatal deploy "cannot make $PREFIX/bin"
     for file in ./src/*; do
-      [ -f "$file" ] || sh ./src/err-fatal deploy "not a file: $file"
       name=$(basename "$file")
       sh ./src/info deploying "$PREFIX/bin/$name"
       cp "$file" "$PREFIX/bin/$name" || sh ./src/err-fatal deploy "cannot copy $file"
@@ -21,10 +20,9 @@ case "${1:-}" in
     done
     ;;
   check)
-    sh ./src/check build.sh || sh ./src/err-fatal check "build.sh has problems"
+    sh ./src/check-sh build.sh || sh ./src/err-fatal check "build.sh has problems"
     for file in ./src/*; do
-      [ -f "$file" ] || sh ./src/err-fatal check "not a file: $file"
-      sh ./src/check "$file" || sh ./src/err-fatal check "$file has problems"
+      sh ./src/check-sh "$file" || sh ./src/err-fatal check "$file has problems"
     done
     ;;
   clean)

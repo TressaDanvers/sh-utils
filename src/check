@@ -1,39 +1,4 @@
 #!/usr/bin/env sh
 set -eu
-
-if [ "$#" -eq 0 ]; then
-  err-fatal usage "check script..."
-fi
-
-for tool in shellcheck checkbashisms; do
-  command -v "$tool" >/dev/null 2>&1 || err-fatal check "$tool is not installed"
-done
-
-problem() {
-  err "$script" "$1"
-  bad=1
-}
-
-status=0
-
-for script in "$@"; do
-  bad=0
-  info checking "$script"
-  if [ ! -f "$script" ]; then
-    problem "file not found"
-  else
-    [ "$(head -n 1 "$script")" = '#!/usr/bin/env sh' ] || problem "line 1 is not #!/usr/bin/env sh"
-    grep -q '^set -eu$' "$script" || problem "no set -eu line"
-    sh -n "$script" || problem "parse error in sh"
-    for shell in dash posh; do
-      if command -v "$shell" >/dev/null 2>&1; then
-        "$shell" -n "$script" || problem "parse error in $shell"
-      fi
-    done
-    checkbashisms -p "$script" || problem "checkbashisms found a problem"
-    shellcheck -s sh "$script" || problem "shellcheck found a problem"
-  fi
-  [ "$bad" -eq 0 ] || status=1
-done
-
-exit "$status"
+export PREFIX="${1:-${PREFIX:-/usr/local}}"
+exec build check
