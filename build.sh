@@ -24,6 +24,13 @@ case "${1:-}" in
       chmod 755 "$PREFIX/bin/$name" || sh ./src/err-fatal deploy "cannot set the mode of $PREFIX/bin/$name"
     done
     ;;
+  check)
+    check build.sh || sh ./src/err-fatal check "build.sh has a problem"
+    for file in ./src/*; do
+      [ -f "$file" ] || sh ./src/err-fatal check "not a file: $file"
+      check "$file" || sh ./src/err-fatal check "$file has a problem"
+    done
+    ;;
   clean)
     sh ./src/err-fatal clean "sh-utils has nothing to clean"
     ;;

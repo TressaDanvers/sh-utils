@@ -2,12 +2,12 @@
 set -eu
 
 bad() {
-  sh "$(dirname "$0")/err-fatal" usage "build.sh [deploy|clean]"
+  sh "$(dirname "$0")/err-fatal" usage "build.sh [deploy|check|clean]"
 }
 
 [ "$#" -le 1 ] || bad
 
 case "${1:-}" in
-  ""|deploy|clean) ;;
+  ""|check|deploy|clean) ;;
   *) bad ;;
 esac
