@@ -5,7 +5,7 @@ ESC=$(printf '\033')
 TAG="${ESC}[1;31mfatal error:${ESC}[39m"
 
 if [ "$#" -eq 0 ]; then
-  echo "$TAG usage:${ESC}[22m err first [rest...]" >&2
+  echo "$TAG usage:${ESC}[22m err-fatal first [rest...]" >&2
   exit 2
 fi
 

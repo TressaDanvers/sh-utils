@@ -4,7 +4,7 @@ set -eu
 cd "$(dirname "$0")"
 sh ./src/build-script-arg "$@"
 
-PREFIX=${PREFIX:-}
+PREFIX=${PREFIX:-/usr/local}
 
 case "${1:-}" in
   "")
