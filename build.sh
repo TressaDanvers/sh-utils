@@ -8,11 +8,7 @@ PREFIX=${PREFIX:-/usr/local}
 
 case "${1:-}" in
   "")
-    for file in ./src/*; do
-      [ -f "$file" ] || sh ./src/err-fatal build "not a file: $file"
-      sh ./src/info building "$file"
-      chmod +x "$file" || sh ./src/err-fatal build "cannot make $file executable"
-    done
+    sh ./src/err-fatal build "sh-utils has nothing to build"
     ;;
   deploy)
     mkdir -p "$PREFIX/bin" || sh ./src/err-fatal deploy "cannot make $PREFIX/bin"
@@ -25,10 +21,10 @@ case "${1:-}" in
     done
     ;;
   check)
-    check build.sh || sh ./src/err-fatal check "build.sh has a problem"
+    sh ./src/check build.sh || sh ./src/err-fatal check "build.sh has problems"
     for file in ./src/*; do
       [ -f "$file" ] || sh ./src/err-fatal check "not a file: $file"
-      check "$file" || sh ./src/err-fatal check "$file has a problem"
+      sh ./src/check "$file" || sh ./src/err-fatal check "$file has problems"
     done
     ;;
   clean)
