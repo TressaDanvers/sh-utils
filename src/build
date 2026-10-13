@@ -1,3 +1,9 @@
 #!/usr/bin/env sh
 set -eu
-exec sh build.sh "$@"
+if [ -f build.sh ]; then
+  exec sh build.sh "$@"
+elif [ -f build.bat ] && command -v wine > /dev/null; then
+  exec wine build "$@"
+else
+  err-fatal build "no build script"
+fi

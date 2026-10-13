@@ -1,4 +1,3 @@
 #!/usr/bin/env sh
 set -eu
-export PREFIX="${1:-${PREFIX:-/usr/local}}"
 exec build deploy
