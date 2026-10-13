@@ -10,7 +10,7 @@ for tool in shellcheck checkbashisms; do
 done
 
 problem() {
-  err "$script" "$1"
+  err "check" "$script: $1"
   bad=1
 }
 
@@ -18,7 +18,7 @@ status=0
 
 for script in "$@"; do
   bad=0
-  info checking "$script"
+  info check "$script"
   if [ ! -f "$script" ]; then
     problem "file not found"
   else

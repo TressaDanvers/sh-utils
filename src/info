@@ -2,7 +2,7 @@
 set -eu
 
 ESC=$(printf '\033')
-TAG="${ESC}[1;34minfo:${ESC}[39m"
+TAG="${ESC}[1;34minformation:${ESC}[39m"
 
 if [ "$#" -eq 0 ]; then
   echo "$TAG usage:${ESC}[22m info first [rest...]" >&2
